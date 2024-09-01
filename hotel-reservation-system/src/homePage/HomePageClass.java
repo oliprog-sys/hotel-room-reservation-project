@@ -22,27 +22,43 @@ public class HomePageClass extends JFrame{
 	cancelReservationBtn, closeBtn;
 	JLabel hotelName;
 	
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
 	public HomePageClass() {
 		
 		// MAIN IMAGE PANEL WHERE ALL THE CONTAINERS AND THE COMPONENTS ADDED
 		BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("hotelBuilding2.jpg")); // Load your image here
+            img = ImageIO.read(new File("hotelBuilding1.jpg")); // Load your image here
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 	     MainImagePanel panel = new MainImagePanel(img);
 		
-		
+		x
 		// MAIN PANEL
 		mainPanel = new JPanel(new GridLayout(3, 2, 20, 17));	
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(80, 20, 20, 20));
 		mainPanel.setBackground(new Color(255, 255, 255, 0));
+		mainPanel.setBackground(Color.green);
+		mainPanel.setPreferredSize(new Dimension(910, 400));
 		
 		// HOTEL NAME PANEL
-		hotelNamePanel = new JPanel();
+		hotelNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 400, 2));
 		hotelNamePanel.setBackground(new Color(255, 255, 255, 0));
+		hotelNamePanel.setBackground(Color.red);		
+		
 		
 //		// Close button
 //		closeBtn = new JButton("X");
@@ -52,10 +68,23 @@ public class HomePageClass extends JFrame{
 		
 		// hotel name label
 		hotelName = new JLabel("PLATINUM HOTEL");
-		hotelName.setBorder(BorderFactory.createEmptyBorder(8, 50, 2, 10));
+		hotelName.setBorder(BorderFactory.createEmptyBorder(8, 300, 2, 0));
 		hotelName.setFont(new Font("Helvetica", Font.BOLD, 43));
 		
+		
+		// Menu bar icon		
+		ImageIcon image = new ImageIcon("menuIcon.png");
+		// Menu bar button
+		menuBarBtn = new JButton("Menu");
+		menuBarBtn.setBorder(null);
+		menuBarBtn.setFocusable(false);
+		menuBarBtn.setFont(new Font("Sans serif", Font.PLAIN, 25));		
+		menuBarBtn.setIcon(image);
+		menuBarBtn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		
 		hotelNamePanel.add(hotelName);
+		
+		hotelNamePanel.add(menuBarBtn);
 //		hotelNamePanel.add(closeBtn, BorderLayout.EAST);
 		
 //		closeBtn.addActionListener(new ActionListener() {
@@ -70,7 +99,7 @@ public class HomePageClass extends JFrame{
 		checkInBtn = new JButton("Check In");
 		checkInBtn.setFocusable(false);
 		checkInBtn.setFont(new Font("Roboto", Font.BOLD, 45));
-		checkInBtn.setBorder(null);
+		checkInBtn.setBorder(null);		
 //		checkInBtn.setBackground(Color.white);
 		// Add the check in button on the panel
 	//	checkInPanel.add(checkInBtn);
@@ -111,60 +140,65 @@ public class HomePageClass extends JFrame{
 		cancelReservationBtn.setFont(new Font("Roboto", Font.BOLD, 45));
 		cancelReservationBtn.setBorder(null);
 		
-		// MENU BAR AND LOG OUT CONTAINER
-		menuBarAndLogOutPanel = new JPanel(new BorderLayout());
-		menuBarAndLogOutPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		menuBarAndLogOutPanel.setBackground(new Color(255, 255, 255, 0));
-		
+//		// MENU BAR AND LOG OUT CONTAINER
+//		menuBarAndLogOutPanel = new JPanel(new BorderLayout());
+//		menuBarAndLogOutPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+//		menuBarAndLogOutPanel.setBackground(Color.blue);
+
 		// MENU BAR PANEL
-		menubarPanel = new JPanel(new BorderLayout());
+		menubarPanel = new JPanel();
+		menubarPanel.setLayout(new BorderLayout());
+		menubarPanel.setBackground(Color.CYAN);
+
+//		// Menu bar icon		
+//		ImageIcon image = new ImageIcon("menuIcon.png");
+//		// Menu bar button
+//		menuBarBtn = new JButton("Menu");
+//		menuBarBtn.setBorder(null);
+//		menuBarBtn.setFocusable(false);
+//		menuBarBtn.setFont(new Font("Sans serif", Font.PLAIN, 25));
+//		menuBarBtn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Adjust padding if needed
+//		menuBarBtn.setIcon(image);
 		
-		// menu bar icon		
-		ImageIcon image = new ImageIcon("menuIcon.png");
-		// menu bar button
-		menuBarBtn = new JButton("Menu");
-		menuBarBtn.setBorder(null);
-		menuBarBtn.setFocusable(false);
-		menuBarBtn.setFont(new Font("Sans serif", Font.PLAIN, 25));
-//		menuBarBtn.setBackground(Color.white);	
-		menuBarBtn.setIcon(image);
+//		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+//		buttonPanel.add(menuBarBtn);
+
+//		// Log out icon
+//		ImageIcon image2 = new ImageIcon("logOutIcon.png");
+//		// Log out button
+//		logoutBtn = new JButton("Log Out");
+//		logoutBtn.setBorder(null);
+//		logoutBtn.setFocusable(false);
+//		logoutBtn.setIcon(image2);
+//		logoutBtn.setFont(new Font("Sans serif", Font.PLAIN, 25));
+//
+//		// Create a panel for the top button and set alignment
+//		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+//		topPanel.add(menuBarBtn);
+//
+//		// Create a panel for the bottom button and set alignment
+//		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+//		bottomPanel.add(logoutBtn);
+
+		// Add panels to the menubarPanel
+//		menubarPanel.add(topPanel, BorderLayout.NORTH);
+//		menubarPanel.add(bottomPanel, BorderLayout.SOUTH);
 		
-		// Log out icon
-		ImageIcon image2 = new ImageIcon("logOutIcon.png");
-		//log out button
-		logoutBtn = new JButton("Log Out");
-		logoutBtn.setBorder(null);
-		logoutBtn.setFocusable(false);
-		logoutBtn.setIcon(image2);
-		logoutBtn.setFont(new Font("Sans serif", Font.PLAIN, 25));		
-//		logoutBtn.setHorizontalAlignment(SwingConstants.RIGHT);
-//		logoutBtn.setVerticalAlignment(SwingConstants.BOTTOM);
-				
-		
-		// Add the icon and the menu button to the panel		
-		menubarPanel.add(menuBarBtn, BorderLayout.NORTH);
-		menubarPanel.add(logoutBtn, BorderLayout.SOUTH);
+//		menubarPanel.add(buttonPanel, BorderLayout.NORTH);
 
 		// ADD ALL PANELS TO THE MAIN PANEL		
-//		mainPanel.add(checkInPanel);
-//		mainPanel.add(checkOutPanel);
-//		mainPanel.add(roomsPanel);
-//		mainPanel.add(guestsPanel);
-		
 		mainPanel.add(checkInBtn);
 		mainPanel.add(checkOutBtn);
 		mainPanel.add(roomsBtn);
 		mainPanel.add(guestsBtn);
 		mainPanel.add(cancelReservationBtn);
-		mainPanel.add(menuBarAndLogOutPanel);
-		
-		
+
 		// ADD TO THE MENU AND LOG OUT PANEL
-		menuBarAndLogOutPanel.add(menubarPanel);
+//		menuBarAndLogOutPanel.add(menubarPanel);
 		
 		panel.add(hotelNamePanel, BorderLayout.NORTH);
 		panel.add(mainPanel, BorderLayout.CENTER);		
-		panel.add(menuBarAndLogOutPanel, BorderLayout.EAST);
+		panel.add(menubarPanel, BorderLayout.EAST);
 		
 		
 		setTitle("Home");
@@ -174,7 +208,7 @@ public class HomePageClass extends JFrame{
 		setLocationRelativeTo(null);
 //		add(hotelNamePanel, BorderLayout.NORTH);
 //		add(mainPanel, BorderLayout.CENTER);
-//		add(menuBarAndLogOutPanel, BorderLayout.EAST);
+//		add(menubarPanel, BorderLayout.EAST);
 		add(panel);
 		setVisible(true);
 	}
@@ -200,4 +234,3 @@ class MainImagePanel extends JPanel {
         }
     }
 }
-
