@@ -1,16 +1,18 @@
-package signInPage;
+package hotelReservationPro;
 
 import java.awt.*;
+import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
 
-public class SignIn extends JFrame {
+public class SignIn extends JFrame implements ActionListener {
 	
 	JPanel logoPanel, userAndPasswordPanel, usernamePanel, passwordPanel, loginButtonPanel;
 	JLabel hotelNameLabel, usernameLabel, passwordLabel;
 	JTextField usernameField, passwordField;
-	JButton loginBtn;
+	JButton loginBtn, createAccountBtn;
 	
 	public SignIn() {
 		// LOGO PANEL
@@ -65,8 +67,19 @@ public class SignIn extends JFrame {
 		loginBtn = new JButton("LOG IN");
 		loginBtn.setFocusable(false);
 		
+		// sign up button
+		createAccountBtn = new JButton("Create account");
+		createAccountBtn.setFocusable(false);
+		
 		// Add the log in button to the panel
 		loginButtonPanel.add(loginBtn);
+		loginButtonPanel.add(createAccountBtn);
+		
+		createAccountBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				new signUp().setVisible(true);
+			}
+		});
 		
 
 		
