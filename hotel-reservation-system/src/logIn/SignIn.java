@@ -2,49 +2,57 @@ package logIn;
 
 import java.awt.*;
 
+
 import java.awt.event.*;
 import java.sql.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import homePage.HomePageClass;
 import signUp.signUp;
 
 
 
-public class SignIn extends JFrame implements ActionListener {
+public class SignIn extends JFrame {
 	
 	JPanel logoPanel, userAndPasswordPanel, usernamePanel, passwordPanel, loginButtonPanel;
 	JLabel hotelNameLabel, usernameLabel, passwordLabel, errorLabel;
 	JTextField usernameField;
 	JButton loginBtn, createAccountBtn;
 	JPasswordField passwordField;
+	public static  String receptionId;
 	
 	private static final String connectingString = "jdbc:sqlserver://DESKTOP-D5PCH38\\"
 			+ "SQLEXPRESS;Database=roomReservationJava;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true;";
 	public static String recUsername;
-	public SignIn() {
+	public SignIn() {		
+		
 		// LOGO PANEL
 		logoPanel = new JPanel();
+		logoPanel.setBackground(null);
+		
 		
 		//hotel name label
 		hotelNameLabel = new JLabel("Platinum Hotel");
 		hotelNameLabel.setFont(new Font("Helvetica", Font.BOLD, 34));
+		hotelNameLabel.setForeground(Color.WHITE);
 		
 		// Add the hotel name label to the logo panel
 		logoPanel.add(hotelNameLabel);
 		
 		// USERNAME AND PASSWORD CONTAINER
 		userAndPasswordPanel = new JPanel();
+		userAndPasswordPanel.setBackground(null);
 		
 		// USERNAME ENTRY PANEL
 		usernamePanel = new JPanel();
+		usernamePanel.setBackground(null);
 		usernamePanel.setBorder(BorderFactory.createEmptyBorder(39, 0, 0, 0));
 		
 		//username label
 		usernameLabel = new JLabel("Username");
 		usernameLabel.setFont(new Font("Lato", Font.BOLD, 18));
+		usernameLabel.setForeground(Color.WHITE);
 		// username field
 		usernameField = new JTextField(20);
 		
@@ -55,9 +63,11 @@ public class SignIn extends JFrame implements ActionListener {
 		
 		// PASSWORD ENTRY PANEL
 		passwordPanel = new JPanel();
+		passwordPanel.setBackground(null);
 		// password label
 		passwordLabel = new JLabel("Password");
 		passwordLabel.setFont(new Font("Lato", Font.BOLD, 18));
+		passwordLabel.setForeground(Color.WHITE);
 		// password field
 		passwordField = new JPasswordField(20);
 		
@@ -75,13 +85,24 @@ public class SignIn extends JFrame implements ActionListener {
 		
 		// LOG IN PANEL
 		loginButtonPanel = new JPanel();
+		loginButtonPanel.setBackground(null);
 		
 		// log in button 
 		loginBtn = new JButton("LOG IN");
+		loginBtn.setForeground(Color.WHITE);
+		loginBtn.setFont(new Font("Roboto", Font.BOLD, 15));
+		loginBtn.setPreferredSize(new Dimension(90, 30));
+		loginBtn.setBackground(new Color(90, 70, 230));
+		loginBtn.setBorder(null);
 		loginBtn.setFocusable(false);
 		
 		// sign up button
 		createAccountBtn = new JButton("Create account");
+		createAccountBtn.setBorder(null);
+		createAccountBtn.setPreferredSize(new Dimension(140, 30));
+		createAccountBtn.setFont(new Font("Roboto", Font.BOLD, 15));
+		createAccountBtn.setForeground(Color.WHITE);
+		createAccountBtn.setBackground(new Color(90, 70, 230));
 		createAccountBtn.setFocusable(false);
 		
 		// Add the log in button to the panel
@@ -90,25 +111,36 @@ public class SignIn extends JFrame implements ActionListener {
 		
 		createAccountBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				dispose();
-				new signUp().setVisible(true);
+				if(usernameField.getText()!=null){
+					JOptionPane.showMessageDialog(SignIn.this, "You should login.", "Warning", JOptionPane.WARNING_MESSAGE);					
+				} else {
+					dispose();
+					new signUp().setVisible(true);
+				}
 			}
 		});
 		
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					if(checkUsernameAndPassword()) {
+					String userName = usernameField.getText();
+					String password = String.valueOf(passwordField.getPassword());
+					
+					if(userName.isEmpty() || password.isEmpty()) {
+						 JOptionPane.showMessageDialog(SignIn.this, "Please fill in all fields.", "Warning", JOptionPane.WARNING_MESSAGE);
+					}else if(checkUsernameAndPassword()) {
 						dispose();
 						recUsername = usernameField.getText(); 
 						HomePageClass hpc = new HomePageClass();
 						hpc.recIdValueInLogin();
+						receptionId = hpc.receptionistIdField.getText();
 						hpc.setVisible(true);
-					} else {
+					} 
+					else {
+						errorLabel.setForeground(Color.RED);
 						errorLabel.setText("Incorrect username or password");
-					}
+				}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 //				dispose();
@@ -121,12 +153,13 @@ public class SignIn extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setTitle("Sign In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setUndecorated(true);
+		ImageIcon icon = new ImageIcon("signIn.png");
+		setIconImage(icon.getImage());
+		getContentPane().setBackground(new Color(80, 80, 80));
 		setResizable(false);
-		//setBackground(Color.black);
 		add(logoPanel, BorderLayout.NORTH);
 		add(userAndPasswordPanel);
-		add(loginButtonPanel, BorderLayout.SOUTH);
+		add(loginButtonPanel, BorderLayout.SOUTH);		
 		setVisible(true);
 		
 	}
@@ -162,6 +195,7 @@ public class SignIn extends JFrame implements ActionListener {
 	    }
 	    return true;
 	}
+	
 	
 	public static void main(String[] args) {
 		new SignIn();

@@ -3,6 +3,8 @@ package homePage;
 import java.awt.*;
 import javax.swing.*;
 
+import actitvities.Activities;
+import actitvities.CheckInClass;
 import logIn.SignIn;
 import signUp.signUp;
 
@@ -18,147 +20,14 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
-//public class HomePageClass extends JFrame{
-//	
-//	JPanel mainPanel, hotelNamePanel, bookNowPanel;//, checkInPanel, checkOutPanel, roomsPanel, guestsPanel, menubarPanel, 
-//	//logOutPanel, , menuBarAndLogOutPanel;
-//	JButton bookNowBtn; // checkInBtn, checkOutBtn, roomsBtn, guestsBtn, logoutBtn, menuBarBtn, 
-//	// cancelReservationBtn, closeBtn;
-//	JLabel hotelName;	
-//	public HomePageClass() {
-//		
-//		// MAIN IMAGE PANEL WHERE ALL THE CONTAINERS AND THE COMPONENTS ADDED
-//		BufferedImage img = null;
-//        try {
-//            img = ImageIO.read(new File("hotelBuilding1.jpg")); // Load your image here
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//	     MainImagePanel panel = new MainImagePanel(img);
-//		
-////		
-//
-//		// MAIN PANEL
-//		mainPanel = new JPanel();
-//		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-////		mainPanel.setBorder(BorderFactory.createEmptyBorder(80, 20, 20, 20));
-////		mainPanel.setBackground(new Color(255, 255, 255, 0));
-////		mainPanel.setBackground(Color.green);
-//		mainPanel.setPreferredSize(new Dimension(910, 400));
-//		
-//		// HOTEL NAME PANEL
-//		hotelNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 400, 2));
-//		hotelNamePanel.setBackground(new Color(255, 255, 255, 0));
-////		hotelNamePanel.setBackground(Color.red);		
-//		
-//		
-////		// Close button
-////		closeBtn = new JButton("X");
-////		closeBtn.setFocusable(false);
-////		closeBtn.setHorizontalAlignment(SwingConstants.RIGHT);
-//		
-//		
-//		// hotel name label
-//		hotelName = new JLabel("PLATINUM HOTEL");
-////		hotelName.setBorder(BorderFactory.createEmptyBorder(8, 300, 2, 0));
-//		hotelName.setFont(new Font("Helvetica", Font.BOLD, 43));
-//		
-//		hotelNamePanel.add(hotelName);
-//		
-//		JPanel welcomePanel = new JPanel();
-//		welcomePanel.setBackground(new Color(255, 255, 255, 0));
-//		
-//		
-//		// welcome label
-//		JLabel welcomeLabel = new JLabel("WELCOME TO THE PLATINUM HOTEL'S");
-//		welcomeLabel.setForeground(Color.WHITE);
-//		welcomeLabel.setFont(new Font("Helvetica", Font.BOLD, 40));
-//		
-//		JLabel welcomeLabel2 = new JLabel("BOOKING APP");
-//		welcomeLabel2.setForeground(Color.WHITE);
-//		welcomeLabel2.setFont(new Font("Helvetica", Font.BOLD, 40));
-//		
-//		welcomePanel.add(welcomeLabel);
-//		welcomePanel.add(welcomeLabel2);
-//		
-//		mainPanel.add(welcomePanel);		
-//		
-//		// Book now button panel
-//		bookNowPanel = new JPanel();
-//		bookNowPanel.setBackground(new Color(255, 255, 255, 0));
-//		// book now button
-//		bookNowBtn = new JButton("Book Now >");
-//		bookNowBtn.setFont(new Font("Roboto", Font.BOLD, 43));		
-////		bookNowBtn.setBackground(new Color(255, 255, 255, 0));
-//		bookNowBtn.setFocusable(false);
-//		bookNowBtn.setBorder(null);
-//		
-//		bookNowPanel.add(bookNowBtn);
-//		
-//		mainPanel.add(bookNowPanel);
-//		
-//		
-//		
-//		panel.add(hotelNamePanel, BorderLayout.NORTH);
-//		panel.add(mainPanel, BorderLayout.CENTER);		
-////		panel.add(menubarPanel, BorderLayout.EAST);
-//		
-//		
-//		setTitle("Home");
-//		setSize(1200, 650);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-////		setUndecorated(true);
-//		setLocationRelativeTo(null);
-////		add(hotelNamePanel, BorderLayout.NORTH);
-////		add(mainPanel, BorderLayout.CENTER);
-////		add(menubarPanel, BorderLayout.EAST);
-//		add(panel);
-//		setVisible(true);
-//		
-//		
-//
-//		
-//	}
-//	
-//	public static void main(String[] args) {
-//		new HomePageClass();
-//	}
-//	
-//}
-//
-//class MainImagePanel extends JPanel {
-//	private BufferedImage backgroundImage;
-//
-//	public MainImagePanel(BufferedImage image) {
-//        this.backgroundImage = image;
-//    }
-//
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        if (backgroundImage != null) {
-//            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-//        }
-//    }
-//}
-
-
-
-//import javax.swing.*;
-//import java.awt.*;
-//import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.IOException;
-//import javax.imageio.ImageIO;
 
 public class HomePageClass extends JFrame {
     
-    JPanel mainPanel, hotelNamePanel, bookNowPanel, receptionistIdPanel;
+    JPanel mainPanel, hotelNamePanel, bookNowPanel, receptionistIdPanel, errorLabelPanel;
     JButton bookNowBtn; 
-    JLabel hotelName, receptionistIdLabel;    
+    JLabel hotelName, receptionistIdLabel, errorLabel;    
     JMenuBar menuBar;
-    JTextField receptionistIdField;
+    public JTextField receptionistIdField;   
     
     private static final String connectingString = "jdbc:sqlserver://DESKTOP-D5PCH38\\"
 			+ "SQLEXPRESS;Database=roomReservationJava;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true;";
@@ -168,7 +37,7 @@ public class HomePageClass extends JFrame {
         // MAIN IMAGE PANEL WHERE ALL THE CONTAINERS AND THE COMPONENTS ADDED
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("hotelBuilding1.jpg")); // Load your image here
+            img = ImageIO.read(new File("hotelBuilding1.jpg")); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -204,8 +73,17 @@ public class HomePageClass extends JFrame {
         welcomeLabel2.setForeground(Color.WHITE);
         welcomeLabel2.setFont(new Font("Helvetica", Font.BOLD, 40));
         
+        errorLabelPanel = new JPanel();
+        errorLabelPanel.setBackground(new Color(255, 255, 255, 0));
+        
+        errorLabel = new JLabel();
+        errorLabel.setFont(new Font("Heveltica", Font.BOLD, 18));
+        errorLabel.setForeground(Color.WHITE);
+        errorLabelPanel.add(errorLabel);
+        
         welcomePanel.add(welcomeLabel);
         welcomePanel.add(welcomeLabel2);
+        
         
         mainPanel.add(welcomePanel);  
         
@@ -218,9 +96,17 @@ public class HomePageClass extends JFrame {
         receptionistIdLabel.setForeground(Color.WHITE);
         
         receptionistIdField = new JTextField(8);
+        receptionistIdField.setEditable(false);
         
         receptionistIdPanel.add(receptionistIdLabel);
         receptionistIdPanel.add(receptionistIdField);
+        
+        try {
+			recIdValueInLogin();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         
         // Book now button panel
@@ -233,27 +119,40 @@ public class HomePageClass extends JFrame {
         
         bookNowPanel.add(bookNowBtn);
         mainPanel.add(bookNowPanel);
+        mainPanel.add(errorLabelPanel);
         
         // Create the menu bar
         menuBar = new JMenuBar();
         JMenu userMenu = new JMenu("User");
         JMenuItem addUser = new JMenuItem("Add User");
-        JMenuItem updateUser = new JMenuItem("Update User");
-        JMenuItem deleteUser = new JMenuItem("Delete User");
+        JMenuItem updateUser = new JMenuItem("Update/Delete User");
+//        JMenuItem deleteUser = new JMenuItem("Delete User");
         JMenuItem logOut = new JMenuItem("Log out");
         
         userMenu.add(addUser);
         userMenu.add(updateUser);
-        userMenu.add(deleteUser);
+//        userMenu.add(deleteUser);
         userMenu.add(logOut);
         menuBar.add(userMenu);
         
         // Add menu bar to the top right
         setJMenuBar(menuBar);
         
+        bookNowBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub	
+				dispose();
+				new CheckInClass().setVisible(true);
+			}
+        	
+        });
+        
         ListenerClass lc = new ListenerClass();
         addUser.addActionListener(lc);
         updateUser.addActionListener(lc);
+        logOut.addActionListener(lc);
      
         
         panel.add(hotelNamePanel, BorderLayout.NORTH);
@@ -261,10 +160,13 @@ public class HomePageClass extends JFrame {
         panel.add(receptionistIdPanel, BorderLayout.SOUTH);
         
         setTitle("Home");
+        ImageIcon homeIcon = new ImageIcon("homePage.png");
+        setIconImage(homeIcon.getImage());
         setSize(1200, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         add(panel);
+       
 //        setVisible(true);
     }
     
@@ -275,20 +177,61 @@ public class HomePageClass extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand() == "Add User") {
-				new signUp().setVisible(true);
-			} else if(e.getActionCommand() == "Update User") {
-				UpdateAndDeleteClass udc = new UpdateAndDeleteClass();
+				errorLabel.setText("");
 				try {
-					udc.updateAndDeleteFun();
-					udc.setVisible(true);
+					if(checkR
+							ecStatus()) {
+						new signUp().setVisible(true);
+					} else {
+						errorLabel.setText("Not Allowed");
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+			} else if(e.getActionCommand() == "Update/Delete User") {
+				errorLabel.setText("");
+				try {
+					if(checkRecStatus()) {
+						UpdateAndDeleteClass udc = new UpdateAndDeleteClass();
+						udc.setVisible(true);
+					} else {
+						errorLabel.setText("Not Allowed");
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			} else if(e.getActionCommand() == "Log out") {
+				HomePageClass.this.dispose();
+				new SignIn().setVisible(true);
 			}
 			
 		}
     	
+    }
+    
+    boolean checkRecStatus() throws SQLException {
+    	String receptionID = receptionistIdField.getText();
+    	int receptionIdNum = Integer.parseInt(receptionID);
+    	
+    	try(Connection conn = DriverManager.getConnection(connectingString)){
+    		String resStatusSql = "SELECT rc_id, rc_role FROM Receptionist WHERE rc_id=?";
+    		try(PreparedStatement pstmtStatus = conn.prepareStatement(resStatusSql)){
+    			pstmtStatus.setInt(1, receptionIdNum);
+    			try(ResultSet valueStatus = pstmtStatus.executeQuery()){
+    				if(valueStatus.next()) {
+    					String roleStatus = valueStatus.getString("rc_role");
+    					if(!roleStatus.equals("Admin")) {
+    						return false;
+    					}
+    				}
+    			}
+    		}
+    	}
+    	return true;
     }
         
     
@@ -310,17 +253,15 @@ public class HomePageClass extends JFrame {
     	}
     }
     
-    void updateAndDelete() throws SQLException {    	    	
-		
-    }
+ 
     
     public void recIdValueInSignUp(String Id) throws SQLException {
     	receptionistIdField.setText(Id);
     }
     
-    public static void main(String[] args) {
-        new HomePageClass();
-    }
+//    public static void main(String[] args) {
+//        new HomePageClass().setVisible(true);;
+//    }
     
 }
 
